@@ -1,15 +1,24 @@
+-- ==============================================
+-- Chargement des données brutes dans les tables
+-- =============================================
+
 BEGIN;
 
-\copy employees FROM 'data/raw/employees.csv' DELIMITER ',' CSV HEADER;
-\copy employees_engagement_survey_data FROM 'data/raw/employees_engagement_survey_data.csv' DELIMITER ',' CSV HEADER;
-\copy recruitment_data FROM 'data/raw/recruitment_data.csv' DELIMITER ',' CSV HEADER;
-\copy training_and_development_data FROM 'data/raw/training_and_development_data.csv' DELIMITER ',' CSV HEADER;
+-- Modification du format de date pour correspondre aux données
+SET datestyle = 'DMY';
+
+\copy raw_employee_data FROM '/Users/aminaabdm/Desktop/HR-Data-Analysis-SQL/data/raw/employee_data.csv' DELIMITER ',' CSV HEADER;
+\copy raw_employee_engagement_survey_data FROM '/Users/aminaabdm/Desktop/HR-Data-Analysis-SQL/data/raw/employee_engagement_survey_data.csv' DELIMITER ',' CSV HEADER;
+\copy raw_recruitment_data FROM '/Users/aminaabdm/Desktop/HR-Data-Analysis-SQL/data/raw/recruitment_data.csv' DELIMITER ',' CSV HEADER;
+\copy raw_training_and_development_data FROM '/Users/aminaabdm/Desktop/HR-Data-Analysis-SQL/data/raw/training_and_development_data.csv' DELIMITER ',' CSV HEADER;
 
 COMMIT;
 
-SELECT COUNT(*) AS employee_count FROM employees;
-SELECT COUNT(*) AS engagement_survey_count FROM employees_engagement_survey_data;
-SELECT COUNT(*) AS recruitment_data_count FROM recruitment_data;
-SELECT COUNT(*) AS training_data_count FROM training_and_development_data;
+-- =======================================
+-- Vérification du chargement des données
+-- =======================================
 
-
+SELECT COUNT(*) FROM raw_employee_data;
+SELECT COUNT(*) FROM raw_employee_engagement_survey_data;
+SELECT COUNT(*) FROM raw_recruitment_data;
+SELECT COUNT(*) FROM raw_training_and_development_data;

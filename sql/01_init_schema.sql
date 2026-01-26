@@ -4,48 +4,94 @@
 -- Purpose: Initialize database schema
 -- =====================================================
 
--- Drop tables if they already exist (safe re-run)
-DROP TABLE IF EXISTS recruitments CASCADE;
-DROP TABLE IF EXISTS employees CASCADE;
-DROP TABLE IF EXISTS jobs CASCADE;
-DROP TABLE IF EXISTS departments CASCADE;
+-- Drop RAW tables if they already exist (safe re-run)
+DROP TABLE IF EXISTS raw_employee_data CASCADE;
+DROP TABLE IF EXISTS raw_employee_engagement_survey_data CASCADE;
+DROP TABLE IF EXISTS raw_recruitment_data CASCADE;
+DROP TABLE IF EXISTS raw_training_and_development_data CASCADE;
+
+-- =========================================
+-- RAW schema creation (mirrors CSV files)
+-- =========================================
 
 -- =========================
--- Departments table
+-- Employee table
 -- =========================
-CREATE TABLE departments (
-    department_id SERIAL PRIMARY KEY,
-    department_name VARCHAR(100) NOT NULL
+CREATE TABLE raw_employee_data (
+    EmpID INTEGER,
+    FirstName TEXT,
+    LastName TEXT,
+    StartDate DATE,
+    ExitDate DATE,
+    Title TEXT,
+    Supervisor TEXT,
+    ADEmail TEXT,
+    BusinessUnit TEXT,
+    EmployeeStatus TEXT,
+    EmployeeType TEXT,
+    PayZone TEXT,
+    EmployeeClassificationType TEXT,
+    TerminationType TEXT,
+    TerminationDescription TEXT,
+    DepartmentType TEXT,
+    Division TEXT,
+    DOB DATE,
+    State TEXT,
+    JobFunctionDescription TEXT,
+    GenderCode TEXT,
+    LocationCode TEXT,
+    RaceDesc TEXT,
+    MaritalDesc TEXT,
+    PerformanceScore TEXT,
+    CurrentEmployeeRating INTEGER
+);
+-- =========================
+-- Employee Engagement Survey Data table
+-- =========================
+CREATE TABLE raw_employee_engagement_survey_data (
+    EmployeeID INTEGER,
+    SurveyDate DATE,
+    EngagementScore INTEGER,
+    SatisfactionScore INTEGER,
+    WorkLifeBalanceScore INTEGER
 );
 
 -- =========================
--- Jobs table
+-- Recruitment table
 -- =========================
-CREATE TABLE jobs (
-    job_id SERIAL PRIMARY KEY,
-    job_title VARCHAR(100) NOT NULL
+CREATE TABLE raw_recruitment_data (
+    ApplicantID INTEGER,
+    ApplicationDate DATE,
+    FirstName TEXT,
+    LastName TEXT,
+    Gender TEXT,
+    DateOfBirth DATE,
+    PhoneNumber TEXT,
+    Email TEXT,
+    Address TEXT,
+    City TEXT,
+    State TEXT,
+    ZipCode TEXT,
+    Country TEXT,
+    EducationLevel TEXT,
+    YearsOfExperience INTEGER,
+    DesiredSalary NUMERIC,
+    JobTitle TEXT,
+    Status TEXT
 );
 
--- =========================
--- Employees table
--- =========================
-CREATE TABLE employees (
-    employee_id SERIAL PRIMARY KEY,
-    first_name VARCHAR(100),
-    last_name VARCHAR(100),
-    hire_date DATE,
-    department_id INT REFERENCES departments(department_id),
-    job_id INT REFERENCES jobs(job_id)
-);
 
--- =========================
--- Recruitments table
--- =========================
-CREATE TABLE recruitments (
-    recruitment_id SERIAL PRIMARY KEY,
-    candidate_name VARCHAR(150),
-    application_date DATE,
-    department_id INT REFERENCES departments(department_id),
-    job_id INT REFERENCES jobs(job_id),
-    status VARCHAR(50)
+-- ====================================
+-- Training and Development Data table
+-- ====================================
+CREATE TABLE raw_training_and_development_data (
+    EmployeeID INTEGER,
+    TrainingDate DATE,
+    TrainingProgramName TEXT,
+    TrainingType TEXT,
+    TrainingOutcome TEXT,
+    Location TEXT,
+    Trainer TEXT,
+    TrainingDurationDays INTEGER,
+    TrainingCost NUMERIC
 );
