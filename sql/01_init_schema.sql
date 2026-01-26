@@ -5,10 +5,10 @@
 -- =====================================================
 
 -- Drop tables if they already exist (safe re-run)
-DROP TABLE IF EXISTS employees;
-DROP TABLE IF EXISTS departments;
-DROP TABLE IF EXISTS jobs;
-DROP TABLE IF EXISTS recruitments;
+DROP TABLE IF EXISTS recruitments CASCADE;
+DROP TABLE IF EXISTS employees CASCADE;
+DROP TABLE IF EXISTS jobs CASCADE;
+DROP TABLE IF EXISTS departments CASCADE;
 
 -- =========================
 -- Departments table
@@ -49,4 +49,3 @@ CREATE TABLE recruitments (
     job_id INT REFERENCES jobs(job_id),
     status VARCHAR(50)
 );
-jh 
