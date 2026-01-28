@@ -1,6 +1,12 @@
 # 📉 HR-Data-Analysis-SQL
 
-⎮Exploratory and analytical SQL queries on HR datasets using PostgreSQL
+⎮ Ce projet présente une **analyse de données RH réalisée en SQL**, à partir de données brutes stockées dans une base PostgreSQL, avec une approche structurée et proche des standards professionnels.
+
+Il vise à démontrer la capacité à :
+
+- comprendre des jeux de données métiers,
+- construire une base de données exploitable,
+- produire des KPI pertinents pour la prise de décision RH.
 
 ## 🧩 Présentation du projet
 
@@ -45,6 +51,7 @@ HR-Data-Analysis-SQL/
 ├── sql/
 │   ├── 01_init_schema.sql      # Création des schémas (tables RAW)
 │   └── 02_load_data.sql        # Chargement des données CSV
+│   └── 03_analysis.sql         # Requêtage SQL
 │
 ├── data/
 │   └── raw/
@@ -70,7 +77,7 @@ Le projet suit une **approche en deux niveaux** :
    * Aucune transformation métier
    * Noms et types fidèles aux données sources
 
-2. (À venir) **Tables analytiques**
+2. **Tables analytiques**
 
    * Nettoyage
    * Normalisation
@@ -134,34 +141,58 @@ Ces requêtes peuvent être exécutées :
 
 ---
 
-## 🧠 Philosophie analytique
+### 📊 KPI analysés
 
-Ce projet illustre la différence entre :
+#### 1️⃣ Taux de conversion des candidats en employés
 
-* **Analyse SQL** :
+**Objectif métier :**  
+Mesurer l’efficacité du processus de recrutement.
 
-  * exploration de bases relationnelles
-  * compréhension des liens entre tables
-  * jointures, regroupements, enrichissement des données
+**Logique :**
 
-* **Analyse Python** (à venir) :
+- Nombre total de candidats (`raw_recruitment_data`)
+- Nombre de candidats effectivement embauchés (`raw_employee_data`)
+- Calcul d’un taux de conversion en pourcentage
 
-  * analyse statistique
-  * visualisation
-  * modélisation
+👉 Ce KPI permet d’évaluer la performance globale du pipeline de recrutement.
 
-SQL est ici utilisé comme **fondation analytique**.
+#### 2️⃣ Engagement des employés selon le niveau d’éducation
+
+**Objectif métier :**  
+Analyser le lien entre le niveau d’éducation à l’embauche et l’engagement des employés.
+
+**Logique :**
+
+- Niveau d’éducation issu des données de recrutement
+- Score d’engagement issu des enquêtes internes
+- Calcul de la moyenne des scores par niveau d’éducation
+
+👉 Ce KPI permet d’identifier d’éventuelles tendances entre profil académique et engagement.
+
+#### 3️⃣ Progression de carrière par niveau d’éducation (proxy formation)
+
+**Objectif métier :**  
+Évaluer la progression de carrière des employés en fonction de leur niveau d’éducation.
+
+**Choix méthodologique :**
+
+- En l’absence de données directes sur les promotions ou augmentations,la **participation aux formations** est utilisée comme **proxy de progression de carrière**.
+
+**Logique :**
+
+- Jointure entre recrutement, employés et formations
+- Comptage du nombre de formations suivies par niveau d’éducation
+- Comparaison entre groupes
+
+👉 Ce KPI permet d’analyser l’équité et la logique des politiques de développement interne.
 
 ---
 
 ## 📈 Évolutions prévues
 
-* Création de tables analytiques nettoyées
-* Jointures métier RH
-* Requêtes SQL avancées (CTE, fenêtres, agrégats)
-* Connexion Python (pandas / psycopg2)
-* Analyse exploratoire et visualisations
+* Création de vues analytiques à partir des requêtes
+* Export des résultats vers Python
+* Analyse statistique et data visualisation
+* Enrichissement des KPI selon de nouveaux besoins métiers
 
 ---
-
-✨ *Projet en cours — améliorations continues*
