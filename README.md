@@ -195,4 +195,3 @@ Analyser le lien entre le niveau d’éducation à l’embauche et l’engagemen
 * Analyse statistique et data visualisation
 * Enrichissement des KPI selon de nouveaux besoins métiers
 
----
